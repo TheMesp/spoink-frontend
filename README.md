@@ -1,5 +1,5 @@
 # spoink-frontend
-Vue frontend of the Spoink Draft League bot.
+Vue frontend of the Spoink Draft League Project.
 
 ## Project setup
 ```
