@@ -3,15 +3,17 @@
     <p>Here's the players:</p>
     <hr>
     <div class="list-unstyled" v-for="player in players.data" :key="player.id">
-      <p>
-        {{player.id}}
-      </p>
-      <hr>
+      <PlayerMinbox
+        :player-name="player.discord_name"
+        :player-profile-url="player.profile_pic_url"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import PlayerMinbox from '@/components/PlayerMinbox.vue';
+
 const API_URL = 'http://138.197.159.196:3000/players';
 
 export default {
@@ -29,6 +31,9 @@ export default {
       });
   },
   methods: {},
+  components: {
+    PlayerMinbox,
+  },
 };
 </script>
 
