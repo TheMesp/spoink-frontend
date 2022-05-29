@@ -6,6 +6,7 @@
       <PlayerMinbox
         :player-name="player.discord_name"
         :player-profile-url="player.profile_pic_url"
+        :player-id="player.id"
       />
     </div>
   </div>
