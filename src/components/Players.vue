@@ -14,8 +14,7 @@
 
 <script>
 import PlayerMinbox from '@/components/PlayerMinbox.vue';
-
-const API_URL = 'http://138.197.159.196:3000/players';
+import { backendGet } from '../helpers';
 
 export default {
   name: 'PlayersComponent',
@@ -25,7 +24,7 @@ export default {
   }),
 
   mounted() {
-    fetch(API_URL)
+    backendGet('players')
       .then((response) => response.json())
       .then((result) => {
         this.players = result;
