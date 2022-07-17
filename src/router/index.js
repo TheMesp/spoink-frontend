@@ -25,6 +25,11 @@ const routes = [
     name: 'player',
     component: () => import('../views/PlayerView.vue'),
   },
+  {
+    path: '/matches',
+    name: 'matches',
+    component: () => import('../views/MatchesView.vue'),
+  },
 ];
 
 const router = createRouter({
