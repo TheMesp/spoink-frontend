@@ -5,7 +5,7 @@
     <div class="list-unstyled" v-for="player in players.data" :key="player.id">
       <PlayerMinbox
         :player-name="player.discord_name"
-        :player-profile-url="player.profile_pic_url"
+        :player-favourite-pokemon="player.favourite_pokemon"
         :player-id="player.id"
       />
     </div>

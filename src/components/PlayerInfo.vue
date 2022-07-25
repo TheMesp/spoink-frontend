@@ -3,7 +3,7 @@
     <h2>
       Welcome to {{ player.discord_name }} ({{player.showdown_name}})'s Profile
     </h2>
-    <img :src="player.profile_pic_url" alt='Player avatar' />
+    <img :src="avatarUrl" alt='Player avatar' />
     <p>
       Recent Matches:
     </p>
@@ -27,6 +27,7 @@ export default {
     error: '',
     player: {},
     playerMatches: [],
+    avatarUrl: '',
   }),
 
   created() {
@@ -34,6 +35,11 @@ export default {
       .then((response) => response.json())
       .then((result) => {
         this.player = result.data;
+        backendGet(`external/pokemon/${this.player.favourite_pokemon}`)
+          .then((externalResponse) => externalResponse.json())
+          .then((pokeApi) => {
+            this.avatarUrl = pokeApi.sprites.front_default;
+          });
       });
     backendGet(`players/${this.$route.params.playerid}/matches`)
       .then((response) => response.json())
