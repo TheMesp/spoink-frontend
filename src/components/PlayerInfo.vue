@@ -30,23 +30,38 @@ export default {
     avatarUrl: '',
   }),
 
-  created() {
-    backendGet(`players/${this.$route.params.playerid}`)
-      .then((response) => response.json())
-      .then((result) => {
-        this.player = result.data;
-        backendGet(`external/pokemon/${this.player.favourite_pokemon}`)
-          .then((externalResponse) => externalResponse.json())
-          .then((pokeApi) => {
-            this.avatarUrl = pokeApi.sprites.front_default;
-          });
-      });
-    backendGet(`players/${this.$route.params.playerid}/matches`)
-      .then((response) => response.json())
-      .then((result) => {
-        this.playerMatches = result.data;
-      });
+  methods: {
+    loadPlayer(id) {
+      backendGet(`players/${id}`)
+        .then((response) => response.json())
+        .then((result) => {
+          this.player = result.data;
+          backendGet(`external/pokemon/${this.player.favourite_pokemon}`)
+            .then((externalResponse) => externalResponse.json())
+            .then((pokeApi) => {
+              this.avatarUrl = pokeApi.sprites.front_default;
+            });
+        });
+      backendGet(`players/${id}/matches`)
+        .then((response) => response.json())
+        .then((result) => {
+          this.playerMatches = result.data;
+        });
+    },
   },
+
+  mounted() {
+    this.loadPlayer(this.$route.params.playerid);
+    this.$watch(
+      () => this.$route.params,
+      (toParams) => {
+        if (toParams.playerid) {
+          this.loadPlayer(toParams.playerid);
+        }
+      },
+    );
+  },
+
   components: {
     MatchMinbox,
   },
