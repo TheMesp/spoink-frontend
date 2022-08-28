@@ -14,12 +14,22 @@
         :match-url="match.replay_link"
       />
     </div>
+    <p>
+      ------------------
+    </p>
+    <div class="list-unstyled" v-for="team in playerTeams" :key="team.id">
+      <TeamMinbox
+        :team-id="team.id"
+        :team-name="team.team_name"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 
 import MatchMinbox from '@/components/MatchMinbox.vue';
+import TeamMinbox from '@/components/TeamMinbox.vue';
 import { backendGet } from '../helpers';
 
 export default {
@@ -27,6 +37,7 @@ export default {
     error: '',
     player: {},
     playerMatches: [],
+    playerTeams: [],
     avatarUrl: '',
   }),
 
@@ -47,6 +58,11 @@ export default {
         .then((result) => {
           this.playerMatches = result.data;
         });
+      backendGet(`players/${id}/teams`)
+        .then((response) => response.json())
+        .then((result) => {
+          this.playerTeams = result.data;
+        });
     },
   },
 
@@ -64,6 +80,7 @@ export default {
 
   components: {
     MatchMinbox,
+    TeamMinbox,
   },
 };
 </script>
