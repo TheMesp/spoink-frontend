@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <h2>
+    <h2 v-if="player.discord_name === player.showdown_name">
+      Welcome to {{ player.discord_name }}'s Profile
+    </h2>
+    <h2 v-else>
       Welcome to {{ player.discord_name }} ({{player.showdown_name}})'s Profile
     </h2>
     <img :src="avatarUrl" alt='Player avatar' />
