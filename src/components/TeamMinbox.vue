@@ -3,12 +3,17 @@
       <p>Team {{ teamName }}</p>
       <div class="list-unstyled" v-for="pokemon in teamData" :key="pokemon.id">
         <p>{{ pokemon.name }}</p>
+        <PokemonIcon
+          :pokemon-id="pokemon.id"
+          :pokemon-name="pokemon.name"
+        />
       </div>
     </div>
 </template>
 
 <script>
 
+import PokemonIcon from '@/components/PokemonIcon.vue';
 import { backendGet } from '../helpers';
 
 export default {
@@ -26,6 +31,10 @@ export default {
       .then((result) => {
         this.teamData = result.data;
       });
+  },
+
+  components: {
+    PokemonIcon,
   },
 
 };
