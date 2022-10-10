@@ -19,7 +19,7 @@ export default {
 
   computed: {
     iconInline() {
-      return `margin: -${this.x}px 0px 0px -${this.y}px;`;
+      return `min-width: 480px; margin: -${this.x}px 0px 0px -${this.y}px;`;
     },
   },
 };
